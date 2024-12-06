@@ -56,4 +56,11 @@ public class TodoService {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo not found" + id));
         todoRepository.delete(todo);
     }
+
+    public TodoDto completeTodo(Long id){
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo not found" + id));
+        todo.setCompleted(true);
+        Todo updatedTodo = todoRepository.save(todo);
+        return TodoMapper.entityToTodoDto(updatedTodo);
+    }
 }
