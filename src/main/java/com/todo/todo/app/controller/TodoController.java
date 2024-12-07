@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/todo")  // API endpoint for creating a new todo item
 public class TodoController {
@@ -52,6 +53,12 @@ public class TodoController {
     public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long id ){
         TodoDto completedTodoDto = todoService.completeTodo(id);
         return ResponseEntity.ok(completedTodoDto);
+    }
+
+    @PatchMapping("{id}/incomplete")
+    public ResponseEntity<TodoDto> inCompleteTodo(@PathVariable("id") Long id ){
+        TodoDto inCompletedTodoDto = todoService.inCompleteTodo(id);
+        return ResponseEntity.ok(inCompletedTodoDto);
     }
 
 
