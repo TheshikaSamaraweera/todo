@@ -25,20 +25,20 @@ public class TodoController {
         return ResponseEntity.ok(savedTodoDTO);
 
     }
-    @PreAuthorize("hasAnyRole('ADMIN,USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodo(){
        List<TodoDto> savedList= todoService.getAllTodos();
        return ResponseEntity.ok(savedList);
 
     }
-    @PreAuthorize("hasAnyRole('ADMIN,USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id){
         TodoDto todoDto = todoService.getTodoById(id);
         return ResponseEntity.ok(todoDto);
     }
-    @PreAuthorize("hasAnyRole('ADMIN,USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PutMapping("{id}")
     public ResponseEntity<TodoDto> updateTodo(@PathVariable("id") Long id, @RequestBody TodoDto todoDto){
         TodoDto updatedTodoDto = todoService.updateTodo(id, todoDto);
@@ -51,14 +51,14 @@ public class TodoController {
         todoService.deleteTodo(id);
         return ResponseEntity.ok("Delete successfully" +id);
     }
-    @PreAuthorize("hasAnyRole('ADMIN,USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PatchMapping("{id}/complete")
     public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long id ){
         TodoDto completedTodoDto = todoService.completeTodo(id);
         return ResponseEntity.ok(completedTodoDto);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN,USER)")
+    @PreAuthorize("hasAnyRole('ADMIN','USER)")
     @PatchMapping("{id}/incomplete")
     public ResponseEntity<TodoDto> inCompleteTodo(@PathVariable("id") Long id ){
         TodoDto inCompletedTodoDto = todoService.inCompleteTodo(id);
